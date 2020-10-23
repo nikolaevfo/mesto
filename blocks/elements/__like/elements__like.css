@@ -1,0 +1,7 @@
+.elements__like {
+  height: 20px;
+  width: 20px;
+}
+
+.elements__like:hover {
+ cursor: pointer;

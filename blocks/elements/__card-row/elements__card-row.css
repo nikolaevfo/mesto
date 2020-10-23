@@ -1,0 +1,7 @@
+.elements__card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 20px 30px 20px;
+  width: 282px;
+}
