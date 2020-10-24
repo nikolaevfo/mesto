@@ -10,3 +10,10 @@
   background-color: #fff;
   opacity: 0.3;
 }
+
+@media (max-width: 424px) {
+  .header:after {
+    width: calc(100% + 30px);
+    transform: translateX(-15px);
+  }
+}

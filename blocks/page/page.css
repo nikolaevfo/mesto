@@ -7,13 +7,22 @@
   max-width: 882px;
   margin: 0 auto;
   min-height: 100vh;
+}
 
-  font-family: "Inter", Arial, sans-serif;
-  color: #fff;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
+@media (max-width: 1023px) {
+  .page {
+    width: calc(100% - 70px);
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    width: calc(100% - 50px);
+  }
+}
+
+@media (max-width: 424px) {
+  .page {
+    width: calc(100% - 30px);
+  }
 }

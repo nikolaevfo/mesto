@@ -367,7 +367,3 @@ a:hover {
 ul li {
   list-style: none;
 }
-
-* {
-  box-sizing: border-box;
-}

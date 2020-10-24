@@ -5,4 +5,11 @@
   background: url("../../../images/plus.svg") center no-repeat;
   border: 2px solid #fff;
   border-radius: 2px;
+  margin-left: auto;
+}
+
+@media (max-width: 767px) {
+  .profile__add-button {
+    margin-left: 0;
+  }
 }
