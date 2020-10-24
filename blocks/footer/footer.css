@@ -1,3 +1,15 @@
 .footer {
   padding-top: 66px;
 }
+
+@media (max-width: 767px) {
+  .footer {
+    padding-top: 58px;
+  }
+}
+
+@media (max-width: 424px) {
+  .footer {
+    padding-top: 48px;
+  }
+}

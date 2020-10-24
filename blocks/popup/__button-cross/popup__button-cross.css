@@ -3,3 +3,18 @@
   top: -50px;
   right: -50px;
 }
+
+@media (max-width: 767px) {
+  .popup__button-cross {
+    right: 0px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 424px) {
+  .popup__button-cross {
+    width: 35px;
+    height: 35px;
+  }
+}
