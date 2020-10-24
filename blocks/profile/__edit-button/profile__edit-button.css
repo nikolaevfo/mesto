@@ -1,11 +1,15 @@
 .profile__edit-button {
-  display: inline-block;
+  display: block;
   height: 24px;
   width: 24px;
   background: url("../../../images/edit.svg") center no-repeat;
   border: 1px solid #fff;
-  margin: 0 17px 5px 0;
+  margin: 0 17px 0 0;
 }
+
+/* .profile__edit-button:active {
+  border-radius: 0;
+} */
 
 @media (max-width: 424px) {
   .profile__edit-button {

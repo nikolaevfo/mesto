@@ -2,7 +2,10 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-  margin-bottom: 36px;
+  max-width: 300px;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
@@ -10,6 +13,7 @@
     text-align: center;
     font-size: 16px;
     line-height: 20px;
+    margin-bottom: 31px;
   }
 }
 
@@ -17,6 +21,5 @@
   .profile__subtitle {
     font-size: 14px;
     line-height: 17px;
-    margin-bottom: 31px;
   }
 }
