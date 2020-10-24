@@ -14,3 +14,10 @@
   background: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
+
+@media (max-width: 424px) {
+  .popup__btn-add {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

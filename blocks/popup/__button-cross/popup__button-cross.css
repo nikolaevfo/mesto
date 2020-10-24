@@ -1,7 +1,7 @@
 .popup__button-cross {
   position: absolute;
-  top: -50px;
-  right: -50px;
+  top: -47px;
+  right: -47px;
 }
 
 @media (max-width: 767px) {
