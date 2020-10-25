@@ -25,4 +25,4 @@ git clone https://github.com/nikolaevfo/mesto.git
 ```
 и откройте файл Index.html в любом браузере
 
-### Ссылка на GH Pages: [Места](https://github.com/nikolaevfo/mesto/index.html "Места").
+### Ссылка на GH Pages: [Места](https://nikolaevfo.github.io/mesto/index.html "Места").
