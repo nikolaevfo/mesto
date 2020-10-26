@@ -2,27 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: start;
-
-  max-width: 882px;
-  margin: 0 auto;
+  align-items: center;
+  width: 100%;
   min-height: 100vh;
-}
-
-@media (max-width: 1023px) {
-  .page {
-    width: calc(100% - 70px);
-  }
-}
-
-@media (max-width: 767px) {
-  .page {
-    width: calc(100% - 50px);
-  }
-}
-
-@media (max-width: 424px) {
-  .page {
-    width: calc(100% - 40px);
-  }
 }

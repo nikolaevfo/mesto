@@ -9,6 +9,7 @@
   border-radius: 2px;
   padding: 15px 0;
   transition: 0.2s;
+  margin-top: 27px;
 }
 .popup__btn-add:hover {
   background: rgba(0, 0, 0, 0.8);
@@ -19,5 +20,6 @@
   .popup__btn-add {
     font-size: 14px;
     line-height: 17px;
+    margin-top: 20px;
   }
 }
