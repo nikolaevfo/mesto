@@ -30,57 +30,7 @@
         <button type="button" class="profile__add-button button"></button>
       </section>
 
-      <section class="elements">
-        <!-- 
-        <article class="card">
-          <img src="./images/zuevi-cluchi.jpg" alt="Зуевы Ключи" class="card__img">
-          <div class="card__row">
-            <h3 class="card__title">Зуевы Ключи</h3>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./images/chegadinskie-pesheri.jpg" alt="Чегадинские пещеры" class="card__img">
-          <div class="card__row">
-            <h3 class="card__title">Чегандинские пещеры</h3>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./images/hram.jpg" alt="Храм" class="card__img">
-          <div class="card__row">
-            <h3 class="card__title">Заброшенный храм</h3>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./images/muvir.jpg" alt="Мувыр" class="card__img">
-          <div class="card__row">
-            <h3 class="card__title">Мувыр</h3>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./images/prud-corobejniki.jpg" alt="Пруд в Коробейниках" class="card__img">
-          <div class="card__row">
-            <h3 class="card__title">Пруд в Коробейниках</h3>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./images/sidorovi-gori.jpg" alt="Сидоровы горы" class="card__img">
-          <div class="card__row">
-            <h3 class="card__title">Сидоровы горы</h3>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article> -->
-
-      </section>
+      <section class="elements"> </section>
 
     </main>
 
@@ -103,8 +53,23 @@
     </div>
   </section>
 
+  <section class="popup-image root__popup">
+    <div class="popup-image__container">
+      <button type="button" class="popup-image__button-cross button"></button>
+      <h3 class="popup-image__title">Новое место</h3>
+      <form action="#" name="popupImageForm" class="popup-image__input">
+        <input type="text" name="popupImageInputName" placeholder="Название"
+          class="popup-image__text popup-image__text_type_name">
+        <input type="text" name="popupImageInputLink" placeholder="Ссылка на картинку"
+          class="popup-image__text popup-image__text_type_link">
+        <button type="submit" class="popup-image__btn-add">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
   <template id="card-template">
     <article class="card">
+      <button type="button" class="card__trash"></button>
       <img src="./images/sidorovi-gori.jpg" alt="Сидоровы горы" class="card__img">
       <div class="card__row">
         <h3 class="card__title">Сидоровы горы</h3>

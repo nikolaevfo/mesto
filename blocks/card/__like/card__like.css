@@ -8,5 +8,5 @@
 
 .card__like:hover {
   cursor: pointer;
-  background: #fff url("../../../images/heart-hover.svg") center/contain no-repeat;
+  opacity: 0.6;
 }
