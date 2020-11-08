@@ -1,0 +1,7 @@
+@media (max-width: 767px) {
+  .popup-card__container {
+    max-width: 430px;
+    width: calc(100% - 80px);
+    padding: 30px 20px;
+  }
+}
