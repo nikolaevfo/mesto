@@ -1,12 +1,12 @@
 // PopupProfile
-let popupProfile = document.querySelector('.popup-profile');
-let openPopupProfileBtn = document.querySelector('.profile__edit-button');
-let closePopupProfileBtn = document.querySelector('.popup-profile__button-cross');
-let formProfileElement = document.querySelector('.popup-profile__input');
-let nameInput = document.querySelector('.popup-profile__text_type_name');
-let jobInput = document.querySelector('.popup-profile__text_type_profession');
-let name = document.querySelector('.profile__title');
-let job = document.querySelector('.profile__subtitle');
+const popupProfile = document.querySelector('.popup-profile');
+const openPopupProfileBtn = document.querySelector('.profile__edit-button');
+const closePopupProfileBtn = document.querySelector('.popup-profile__button-cross');
+const formProfileElement = document.querySelector('.popup-profile__input');
+const nameInput = document.querySelector('.popup-profile__text_type_name');
+const jobInput = document.querySelector('.popup-profile__text_type_profession');
+const name = document.querySelector('.profile__title');
+const job = document.querySelector('.profile__subtitle');
 
 function openProfilePopup() {
   nameInput.value = name.textContent;
@@ -20,8 +20,8 @@ function closeProfilePopup() {
 
 function formProfileSubmitHandler(evt) {
   evt.preventDefault();
-  let nameValue = nameInput.value;
-  let jobValue = jobInput.value;
+  const nameValue = nameInput.value;
+  const jobValue = jobInput.value;
   name.textContent = `${nameValue}`;
   job.textContent = `${jobValue}`;
   closeProfilePopup()
@@ -29,12 +29,12 @@ function formProfileSubmitHandler(evt) {
 
 
 // PopupCard
-let popupCard = document.querySelector('.popup-card');
-let openPopupCardBtn = document.querySelector('.profile__add-button');
-let closePopupCardBtn = document.querySelector('.popup-card__button-cross');
-let formCardElement = document.querySelector('.popup-card__input');
-let placeInput = document.querySelector('.popup-card__text_type_place');
-let linkInput = document.querySelector('.popup-card__text_type_link');
+const popupCard = document.querySelector('.popup-card');
+const openPopupCardBtn = document.querySelector('.profile__add-button');
+const closePopupCardBtn = document.querySelector('.popup-card__button-cross');
+const formCardElement = document.querySelector('.popup-card__input');
+const placeInput = document.querySelector('.popup-card__text_type_place');
+const linkInput = document.querySelector('.popup-card__text_type_link');
 
 function openCardPopup() {
   popupCard.classList.add('popup_opened');
@@ -78,10 +78,10 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardsContainer = document.querySelector('.elements');
 
 
-let popupImage = document.querySelector('.popup-image');
-let popupImageLink = popupImage.querySelector('.popup-image__img');
-let popupImagePlace = popupImage.querySelector('.popup-image__title');
-let closePopupImageBtn = document.querySelector('.popup-image__button-cross');
+const popupImage = document.querySelector('.popup-image');
+const popupImageLink = popupImage.querySelector('.popup-image__img');
+const popupImagePlace = popupImage.querySelector('.popup-image__title');
+const closePopupImageBtn = document.querySelector('.popup-image__button-cross');
 
 function addCard(cardElement) {
   const cardNewElement = cardTemplate.cloneNode(true);
@@ -98,7 +98,6 @@ function addCard(cardElement) {
     const eventTarget = evt.target;
     const deleteItem = eventTarget.closest('.card');
     deleteItem.remove();
-    console.log(deleteItem)
   })
 
   cardNewElement.querySelector('.card__img').addEventListener('click', function (evt) {
