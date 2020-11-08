@@ -53,24 +53,32 @@
     </div>
   </section>
 
-  <section class="popup-image popup root__popup">
-    <div class="popup-image__container popup__container">
-      <button type="button" class="popup-image__button-cross popup__button-cross button"></button>
-      <h3 class="popup-image__title popup__title">Новое место</h3>
-      <form action="#" name="popupImageForm" class="popup-image__input popup__input">
+  <section class="popup-card popup root__popup">
+    <div class="popup-card__container popup__container">
+      <button type="button" class="popup-card__button-cross popup__button-cross button"></button>
+      <h3 class="popup-card__title popup__title">Новое место</h3>
+      <form action="#" name="popupCardForm" class="popup-card__input popup__input">
         <input type="text" name="popupInputPlace" placeholder="Название"
-          class="popup-image__text popup__text popup-image__text_type_place">
+          class="popup-card__text popup__text popup-card__text_type_place">
         <input type="text" name="popupInputLink" placeholder="Ссылка на картинку"
-          class="popup-image__text popup__text popup-image__text_type_link">
-        <button type="submit" class="popup-image__btn-add popup__btn-add">Сохранить</button>
+          class="popup-card__text popup__text popup-card__text_type_link">
+        <button type="submit" class="popup-card__btn-add popup__btn-add">Сохранить</button>
       </form>
+    </div>
+  </section>
+
+  <section class="root__popup popup-image">
+    <div class="popup-image__container">
+      <button type="button" class="popup-image__button-cross button"></button>
+      <img src="" alt="Картинка" class="popup-image__img">
+      <h3 class="popup-image__title"></h3>
     </div>
   </section>
 
   <template id="card-template">
     <article class="card">
       <button type="button" class="card__trash"></button>
-      <img src="./images/sidorovi-gori.jpg" alt="Сидоровы горы" class="card__img">
+      <img src="./images/sidorovi-gori.jpg" alt="Картинка" class="card__img">
       <div class="card__row">
         <h3 class="card__title">Сидоровы горы</h3>
         <button type="button" class="card__like"></button>

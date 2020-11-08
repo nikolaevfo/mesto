@@ -1,0 +1,26 @@
+.popup-image__button-cross {
+  position: absolute;
+  top: -47px;
+  right: -47px;
+  background: url("../../../images/cross.svg") center/contain no-repeat;
+  width: 58px;
+  height: 58px;
+}
+
+@media (max-width: 767px) {
+  .popup-image__button-cross {
+    top: -40px;
+    right: -40px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 424px) {
+  .popup-image__button-cross {
+    top: -30px;
+    right: -30px;
+    width: 35px;
+    height: 35px;
+  }
+}
