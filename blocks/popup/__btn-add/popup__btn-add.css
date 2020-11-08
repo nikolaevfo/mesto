@@ -10,6 +10,8 @@
   padding: 15px 0;
   transition: 0.2s;
   margin-top: 27px;
+  border: none;
+  outline: none;
 }
 .popup__btn-add:hover {
   background: rgba(0, 0, 0, 0.8);

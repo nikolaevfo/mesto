@@ -5,11 +5,4 @@
   height: 19px;
   width: 18px;
   background: url("../../../images/Trash.svg") center/contain no-repeat;
-  outline: none;
-  transition: 0.2s;
-}
-
-.card__trash:hover {
-  cursor: pointer;
-  opacity: 0.6;
 }

@@ -1,6 +1,9 @@
 .button {
   transition: 0.2s;
   display: block;
+
+  cursor: pointer;
+  border: none;
 }
 
 .button:focus {
@@ -8,6 +11,5 @@
 }
 
 .button:hover {
-  cursor: pointer;
   opacity: 0.6;
 }
