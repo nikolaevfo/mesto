@@ -54,6 +54,16 @@ const cardElements = initialCards.map(function (item) {
 
 cardsContainer.append(...cardElements);
 
+// Лайк карточек
+const likeButton = document.querySelectorAll('.card__like');
+likeButton.forEach(function (item) {
+  item.addEventListener('click', function (evt) {
+    const eventTarget = evt.target;
+    console.log(eventTarget)
+    eventTarget.classList.toggle('card__like_active');
+  })
+})
+
 // PopupProfile
 function openProfilePopup() {
   nameInput.value = name.textContent;
@@ -96,7 +106,7 @@ function formImageSubmitHandler(evt) {
   cardNewElement.querySelector('.card__title').textContent = `${placeValue}`;
   cardNewElement.querySelector('.card__img').src = `${linkValue}`;
 
-  cardsContainer.append(cardNewElement);
+  cardsContainer.prepend(cardNewElement);
 
   closeImagePopup()
 }
