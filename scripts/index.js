@@ -63,17 +63,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-// PopupProfile
-function formProfileSubmitHandler(evt) {
-  evt.preventDefault();
-  const nameValue = nameInput.value;
-  const jobValue = jobInput.value;
-  name.textContent = `${nameValue}`;
-  job.textContent = `${jobValue}`;
-  closePopup(popupProfile);
-}
-
-
 function likeCard(item) {
   item.classList.toggle('card__like_active');
 }
@@ -94,8 +83,6 @@ function openImagePopup(item) {
   openPopup(popupImage);
 }
 
-
-//  PopupImage
 function createCard(item) {
   const cardNewElement = cardTemplate.cloneNode(true);
 
@@ -126,6 +113,17 @@ function addCard(item) {
 // Добавляем начальные карточки
 initialCards.forEach(addCard);
 
+// PopupProfile
+function formProfileSubmitHandler(evt) {
+  evt.preventDefault();
+  const nameValue = nameInput.value;
+  const jobValue = jobInput.value;
+  name.textContent = `${nameValue}`;
+  job.textContent = `${jobValue}`;
+  closePopup(popupProfile);
+}
+
+// PopupCard
 formCardElement.addEventListener('submit', evt => {
   evt.preventDefault();
 
@@ -135,16 +133,8 @@ formCardElement.addEventListener('submit', evt => {
   cardAddElement.link = linkInput.value;
 
   addCard(cardAddElement);
-
-  formCardElement.reset()
-
-  closeCardPopup();
+  closePopup(popupCard);
 });
-
-// PopupImage
-function closeImagePopup() {
-  popupImage.classList.remove('popup-image_opened');
-}
 
 // ======================================================================================
 openPopupProfileBtn.addEventListener('click', function () {
@@ -157,7 +147,14 @@ closePopupProfileBtn.addEventListener('click', function () {
 });
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 
-openPopupCardBtn.addEventListener('click', openCardPopup);
-closePopupCardBtn.addEventListener('click', closeCardPopup);
+openPopupCardBtn.addEventListener('click', function () {
+  formCardElement.reset();
+  openPopup(popupCard);
+});
+closePopupCardBtn.addEventListener('click', function () {
+  closePopup(popupCard);
+});
 
-closePopupImageBtn.addEventListener('click', closeImagePopup);
+closePopupImageBtn.addEventListener('click', function () {
+  closePopup(popupImage);
+});
