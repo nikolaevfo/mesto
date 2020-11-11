@@ -26,7 +26,7 @@ const initialCards = [
   }
 ];
 
-// PopupProfile 
+// PopupProfile const
 const popupProfile = document.querySelector('.popup-profile');
 const openPopupProfileBtn = document.querySelector('.profile__edit-button');
 const closePopupProfileBtn = document.querySelector('.popup-profile__button-cross');
@@ -79,7 +79,6 @@ function openImagePopup(item) {
 
   popupImageLink.src = clickedCardLink.src;
   popupImagePlace.textContent = clickedCardPlace.textContent;
-
   openPopup(popupImage);
 }
 
@@ -88,7 +87,6 @@ function createCard(item) {
 
   cardNewElement.querySelector('.card__title').textContent = item.name;
   cardNewElement.querySelector('.card__img').src = item.link;
-
   cardNewElement.querySelector('.card__like').addEventListener('click', function (evt) {
     const eventTarget = evt.target;
     likeCard(eventTarget);
@@ -113,6 +111,7 @@ function addCard(item) {
 // Добавляем начальные карточки
 initialCards.forEach(addCard);
 
+
 // PopupProfile
 function formProfileSubmitHandler(evt) {
   evt.preventDefault();
@@ -123,19 +122,14 @@ function formProfileSubmitHandler(evt) {
   closePopup(popupProfile);
 }
 
-// PopupCard
-formCardElement.addEventListener('submit', evt => {
+function formCardSubmitHandler(evt) {
   evt.preventDefault();
-
   const cardAddElement = {};
-
   cardAddElement.name = placeInput.value;
   cardAddElement.link = linkInput.value;
-
   addCard(cardAddElement);
   closePopup(popupCard);
-});
-
+}
 // ======================================================================================
 openPopupProfileBtn.addEventListener('click', function () {
   nameInput.value = name.textContent;
@@ -147,6 +141,7 @@ closePopupProfileBtn.addEventListener('click', function () {
 });
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 
+
 openPopupCardBtn.addEventListener('click', function () {
   formCardElement.reset();
   openPopup(popupCard);
@@ -154,6 +149,8 @@ openPopupCardBtn.addEventListener('click', function () {
 closePopupCardBtn.addEventListener('click', function () {
   closePopup(popupCard);
 });
+formCardElement.addEventListener('submit', formCardSubmitHandler);
+
 
 closePopupImageBtn.addEventListener('click', function () {
   closePopup(popupImage);
