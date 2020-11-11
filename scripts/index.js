@@ -119,8 +119,8 @@ function createCard(item) {
 }
 
 function addCard(item) {
-  const addElement = createCard(item)
-  cardsContainer.prepend(addElement);
+  const addedElement = createCard(item)
+  cardsContainer.prepend(addedElement);
 }
 
 // Добавляем начальные карточки
@@ -129,7 +129,7 @@ initialCards.forEach(addCard);
 formCardElement.addEventListener('submit', evt => {
   evt.preventDefault();
 
-  let cardAddElement = {};
+  const cardAddElement = {};
 
   cardAddElement.name = placeInput.value;
   cardAddElement.link = linkInput.value;
