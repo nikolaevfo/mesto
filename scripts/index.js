@@ -155,3 +155,47 @@ formCardElement.addEventListener('submit', formCardSubmitHandler);
 closePopupImageBtn.addEventListener('click', function () {
   closePopup(popupImage);
 });
+
+
+// validation===========================================================================
+
+const inputList = formProfileElement.querySelectorAll('.popup__input')
+const submitButton = formProfileElement.querySelector('.popup__btn-add')
+
+function showInputError(form, input) {
+  const formError = form.querySelector(`#${input.id}-error`);
+  formError.textContent = input.validationMessage;
+  input.classList.add('popup-profile__text_state_invalid');
+}
+
+function hideInputError(form, input) {
+  const formError = form.querySelector(`#${input.id}-error`);
+  formError.textContent = '';
+  input.classList.remove('popup-profile__text_state_invalid');
+}
+
+function isInputValid(form, input) {
+  if (input.validity.valid) {
+    hideInputError(form, input);
+  } else {
+    showInputError(form, input);
+  }
+}
+
+function toggleButtonState(button, isActive) {
+  if (isActive) {
+    button.classList.remove('popup__btn_invalid');
+    button.disabled = false;
+  } else {
+    button.classList.add('popup__btn_invalid');
+    button.disabled = true;
+  }
+}
+
+inputList.forEach((input) => {
+  input.addEventListener('input', () => {
+    isInputValid(formProfileElement, input);
+    toggleButtonState(submitButton, formProfileElement.checkValidity())
+  })
+})
+
