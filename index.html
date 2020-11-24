@@ -50,7 +50,7 @@
         <span id="profile-name-error" class="popup__text-error"></span>
         <input type="text" name="popupInputJob" placeholder="Введите Вашу профессию"
           class="popup-profile__text popup__text popup-profile__text_type_profession popup__input" id="profile-job"
-          required minlength="2" maxlength="40">
+          required minlength="2" maxlength="200">
         <span id="profile-job-error" class="popup__text-error"></span>
         <button type="submit" class="popup-profile__btn-add popup__btn-add">Сохранить</button>
       </form>
@@ -63,11 +63,11 @@
       <h3 class="popup-card__title">Новое место</h3>
       <form action="#" name="popupCardForm" class="popup-card__form popup__form">
         <input type="text" name="popupInputPlace" placeholder="Название"
-          class="popup-card__text popup-card__text_type_place popup__input" id="card-place" required minlength="2"
-          maxlength="40">
+          class="popup-card__text popup__text popup-card__text_type_place popup__input" id="card-place" required
+          minlength="2" maxlength="30">
         <span id="card-place-error" class="popup__text-error"></span>
         <input type="url" name="popupInputLink" placeholder="Ссылка на картинку"
-          class="popup-card__text popup-card__text_type_link popup__input" id="card-link" required>
+          class="popup-card__text popup__text popup-card__text_type_link popup__input" id="card-link" required>
         <span id="card-link-error" class="popup__text-error"></span>
         <button type="submit" class="popup-card__btn-add popup__btn-add">Сохранить</button>
       </form>
@@ -94,6 +94,7 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

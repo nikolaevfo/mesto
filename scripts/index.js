@@ -136,8 +136,9 @@ openPopupProfileBtn.addEventListener('click', function () {
 
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
+  button.classList.remove('popup__btn-add_invalid');
+  button.disabled = false;
 
-  toggleButtonState(button, true);
   openPopup(popupProfile);
 });
 closePopupProfileBtn.addEventListener('click', function () {
@@ -159,63 +160,3 @@ formCardElement.addEventListener('submit', formCardSubmitHandler);
 closePopupImageBtn.addEventListener('click', function () {
   closePopup(popupImage);
 });
-
-
-// validation===========================================================================
-
-
-
-function showInputError(form, input) {
-  const formError = form.querySelector(`#${input.id}-error`);
-  formError.textContent = input.validationMessage;
-  input.classList.add('popup__text_state_invalid');
-}
-
-function hideInputError(form, input) {
-  const formError = form.querySelector(`#${input.id}-error`);
-  formError.textContent = '';
-  input.classList.remove('popup__text_state_invalid');
-}
-
-function isInputValid(form, input) {
-  if (input.validity.valid) {
-    hideInputError(form, input);
-  } else {
-    showInputError(form, input);
-  }
-}
-
-function toggleButtonState(button, isActive) {
-  if (isActive) {
-    button.classList.remove('popup__btn-add_invalid');
-    button.disabled = false;
-  } else {
-    button.classList.add('popup__btn-add_invalid');
-    button.disabled = true;
-  }
-}
-
-function setEventListeners(form) {
-  const inputList = form.querySelectorAll('.popup__input');
-  const submitButton = form.querySelector('.popup__btn-add');
-
-  inputList.forEach((input) => {
-    input.addEventListener('input', () => {
-      isInputValid(form, input);
-      toggleButtonState(submitButton, form.checkValidity())
-    })
-  })
-}
-
-function enableValidation() {
-  const forms = document.querySelectorAll('.popup__form');
-  forms.forEach((form) => {
-    setEventListeners(form);
-
-    const submitButton = form.querySelector('.popup__btn-add');
-    toggleButtonState(submitButton, form.checkValidity());
-  });
-
-}
-
-enableValidation();
