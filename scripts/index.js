@@ -54,8 +54,16 @@ const popupImageLink = popupImage.querySelector('.popup-image__img');
 const popupImagePlace = popupImage.querySelector('.popup-image__title');
 const closePopupImageBtn = document.querySelector('.popup-image__button-cross');
 
-
 function openPopup(popup) {
+  const form = popup.querySelector('.popup__form');
+  const inputList = popup.querySelectorAll('.popup__input');
+
+  inputList.forEach((input) => {
+    const formError = form.querySelector(`#${input.id}-error`);
+    formError.textContent = '';
+    input.classList.remove('popup__text_state_invalid');
+  })
+
   popup.classList.add('popup_opened');
 }
 
@@ -136,6 +144,7 @@ openPopupProfileBtn.addEventListener('click', function () {
 
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
+
   button.classList.remove('popup__btn-add_invalid');
   button.disabled = false;
 
@@ -149,6 +158,11 @@ formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 
 openPopupCardBtn.addEventListener('click', function () {
   formCardElement.reset();
+
+  const button = document.querySelector('.popup-card__btn-add');
+  button.classList.add('popup__btn-add_invalid');
+  button.disabled = true;
+
   openPopup(popupCard);
 });
 closePopupCardBtn.addEventListener('click', function () {
@@ -160,3 +174,24 @@ formCardElement.addEventListener('submit', formCardSubmitHandler);
 closePopupImageBtn.addEventListener('click', function () {
   closePopup(popupImage);
 });
+
+
+// Закрытие попапа кликом и Esc=====================================
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    const popupList = document.querySelectorAll('.popup');
+    popupList.forEach((popup) => {
+      closePopup(popup);
+    })
+  }
+})
+
+document.addEventListener('click', function (evt) {
+  if (evt.target.className.includes('popup')) {
+    const popupList = document.querySelectorAll('.popup');
+    popupList.forEach((popup) => {
+      closePopup(popup);
+    })
+  }
+})
