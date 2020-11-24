@@ -65,10 +65,22 @@ function openPopup(popup) {
   })
 
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeOverlayEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeOverlayEsc)
+}
+
+// Закрытие попапа Esc
+function closeOverlayEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popupList = document.querySelectorAll('.popup');
+    popupList.forEach((popup) => {
+      closePopup(popup);
+    })
+  }
 }
 
 function likeCard(item) {
@@ -138,6 +150,10 @@ function formCardSubmitHandler(evt) {
   addCard(cardAddElement);
   closePopup(popupCard);
 }
+
+
+
+
 // ======================================================================================
 openPopupProfileBtn.addEventListener('click', function () {
   const button = document.querySelector('.popup-profile__btn-add');
@@ -175,18 +191,7 @@ closePopupImageBtn.addEventListener('click', function () {
   closePopup(popupImage);
 });
 
-
-// Закрытие попапа кликом и Esc=====================================
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
-    const popupList = document.querySelectorAll('.popup');
-    popupList.forEach((popup) => {
-      closePopup(popup);
-    })
-  }
-})
-
+// Закрытие попапа кликом
 document.addEventListener('click', function (evt) {
   if (evt.target.className.includes(' popup ')) {
     const popupList = document.querySelectorAll('.popup');
