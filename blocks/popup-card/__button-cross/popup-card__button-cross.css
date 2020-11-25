@@ -1,8 +1,4 @@
 .popup-card__button-cross {
-  position: absolute;
-  top: -47px;
-  right: -47px;
-  background: url("../../../images/cross.svg") center/contain no-repeat;
   width: 58px;
   height: 58px;
 }
@@ -11,8 +7,6 @@
   .popup-card__button-cross {
     top: -40px;
     right: -40px;
-    width: 45px;
-    height: 45px;
   }
 }
 
@@ -20,7 +14,5 @@
   .popup-card__button-cross {
     top: -30px;
     right: -30px;
-    width: 35px;
-    height: 35px;
   }
 }

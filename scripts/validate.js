@@ -18,13 +18,17 @@ function isInputValid(form, input, config) {
   }
 }
 
+function disableButton(btn, classAdd) {
+  btn.classList.add(classAdd);
+  btn.disabled = true;
+}
+
 function toggleButtonState(button, isActive, config) {
   if (isActive) {
     button.classList.remove(config.buttonInvalidClass);
     button.disabled = false;
   } else {
-    button.classList.add(config.buttonInvalidClass);
-    button.disabled = true;
+    disableButton(button, config.buttonInvalidClass)
   }
 }
 
@@ -43,10 +47,16 @@ function setEventListeners(form, config) {
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector);
   forms.forEach((form) => {
+    const submitButtonCard = document.querySelector('.popup-card__btn-add');
+
     setEventListeners(form, config);
 
-    const submitButton = form.querySelector(config.submitButtonSelector);
-    toggleButtonState(submitButton, form.checkValidity(), config);
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
+    // только для Card
+    disableButton(submitButtonCard, config.buttonInvalidClass)
   });
 
 }

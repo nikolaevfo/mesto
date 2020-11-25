@@ -1,0 +1,10 @@
+.popup-profile__button-cross {
+  width: 58px;
+  height: 58px;
+}
+
+@media (max-width: 767px) {
+  .popup-profile__button-cross {
+    right: 0px;
+  }
+}
