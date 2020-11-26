@@ -57,7 +57,7 @@ function enableValidation(config) {
     });
 
     // для первого открывания попапа Card
-    // disableButton(submitButtonCard, config.buttonInvalidClass);
+    disableButton(submitButtonCard, config.buttonInvalidClass);
   });
 
 }
