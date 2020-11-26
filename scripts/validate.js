@@ -53,10 +53,11 @@ function enableValidation(config) {
 
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      disableButton(submitButtonCard, config.buttonInvalidClass);
     });
 
-    // только для Card
-    disableButton(submitButtonCard, config.buttonInvalidClass)
+    // для первого открывания попапа Card
+    // disableButton(submitButtonCard, config.buttonInvalidClass);
   });
 
 }
