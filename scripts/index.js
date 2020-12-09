@@ -29,6 +29,15 @@ const initialCards = [
   }
 ];
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn-add',
+  buttonInvalidClass: 'popup__btn-add_invalid',
+  inputErrorClass: 'popup__text_state_invalid'
+}
+const forms = document.querySelectorAll('.popup__form');
+
 // PopupProfile const
 const popupProfile = document.querySelector('.popup-profile');
 const openPopupProfileBtn = document.querySelector('.profile__edit-button');
@@ -138,7 +147,7 @@ initialCards.forEach((item) => {
   addCard(item, '.card-template')
 });
 
-// ======================================================================================
+
 openPopupProfileBtn.addEventListener('click', function () {
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
@@ -165,17 +174,6 @@ popupList.forEach((popup) => {
 })
 
 
-// ================================================================
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn-add',
-  buttonInvalidClass: 'popup__btn-add_invalid',
-  inputErrorClass: 'popup__text_state_invalid'
-}
-
-const forms = document.querySelectorAll('.popup__form');
 forms.forEach((form) => {
   const formNew = new FormValidator(validationConfig, form);
   formNew.enableValidation();
