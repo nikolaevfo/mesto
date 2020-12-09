@@ -1,5 +1,3 @@
-// import { openPopup, closeOverlayEsc, closePopup } from './index.js'
-
 export default class Card {
 
   constructor(data, cardSelector) {
@@ -35,9 +33,6 @@ export default class Card {
     this._element.querySelector('.card__trash').addEventListener('click', () => {
       this._deleteCard();
     });
-    // this._element.querySelector('.card__img').addEventListener('click', () => {
-    //   this._openImagePopup();
-    // });
   }
 
   _likeCard() {
@@ -48,19 +43,4 @@ export default class Card {
     const _deleteItem = this._element.querySelector('.card__trash').closest('.card');
     _deleteItem.remove();
   }
-
-  /*
-  _openImagePopup() {
-    const _clickedCardLink = this._element.querySelector('.card__img');
-    const _clickedCardPlace = this._element.querySelector('.card__title');
-    const _popupImage = document.querySelector('.popup-image');
-    const _popupImageLink = _popupImage.querySelector('.popup-image__img');
-    const _popupImagePlace = _popupImage.querySelector('.popup-image__title');
-
-    _popupImageLink.src = _clickedCardLink.src;
-    _popupImagePlace.textContent = _clickedCardPlace.textContent;
-
-    openPopup(_popupImage);
-  }*/
-
 };
