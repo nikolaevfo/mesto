@@ -56,11 +56,11 @@ export default class FormValidator {
     if (this._form.classList.contains('popup-card__form')) {
       this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        this._disableButton(this._submitButton, this._config.buttonInvalidClass);
+        this._disableButton(this._submitButton);
       });
 
       // для первого открывания попапа Card
-      this._disableButton(this._submitButton, this._config.buttonInvalidClass);
+      this._disableButton(this._submitButton);
     }
 
     this._setEventListeners();

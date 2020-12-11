@@ -43,7 +43,6 @@ export default class Card {
   }
 
   _likeCard(evt) {
-    console.log(evt.target);
     evt.target.classList.toggle('card__like_active');
   }
 
