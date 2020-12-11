@@ -2,7 +2,7 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
-    this._submitButtonCard = this._form.querySelector('.popup-card__btn-add');
+    this._submitButton = this._form.querySelector(this._config.submitButtonSelector);
   }
 
   _showInputError(input) {
@@ -56,11 +56,11 @@ export default class FormValidator {
     if (this._form.classList.contains('popup-card__form')) {
       this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        this._disableButton(this._submitButtonCard, this._config.buttonInvalidClass);
+        this._disableButton(this._submitButton, this._config.buttonInvalidClass);
       });
 
       // для первого открывания попапа Card
-      this._disableButton(this._submitButtonCard, this._config.buttonInvalidClass);
+      this._disableButton(this._submitButton, this._config.buttonInvalidClass);
     }
 
     this._setEventListeners();
