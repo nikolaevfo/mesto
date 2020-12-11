@@ -2,6 +2,7 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
+    this._submitButtonCard = this._form.querySelector('.popup-card__btn-add');
   }
 
   _showInputError(input) {
@@ -29,24 +30,23 @@ export default class FormValidator {
       button.classList.remove(this._config.buttonInvalidClass);
       button.disabled = false;
     } else {
-      this._disableButton(button, this._config.buttonInvalidClass)
+      this._disableButton(button)
     }
   }
 
-  _disableButton(btn, classAdd) {
-    btn.classList.add(classAdd);
+  _disableButton(btn) {
+    btn.classList.add(this._config.buttonInvalidClass);
     btn.disabled = true;
   }
 
   _setEventListeners() {
 
     const _inputList = this._form.querySelectorAll(this._config.inputSelector);
-    const _submitButton = this._form.querySelector(this._config.submitButtonSelector);
 
     _inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._isInputValid(input);
-        this._toggleButtonState(_submitButton, this._form.checkValidity())
+        this._toggleButtonState(this._submitButton, this._form.checkValidity())
       })
     })
   }
@@ -54,14 +54,13 @@ export default class FormValidator {
   enableValidation() {
 
     if (this._form.classList.contains('popup-card__form')) {
-      const _submitButtonCard = this._form.querySelector('.popup-card__btn-add');
       this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        this._disableButton(_submitButtonCard, this._config.buttonInvalidClass);
+        this._disableButton(this._submitButtonCard, this._config.buttonInvalidClass);
       });
 
       // для первого открывания попапа Card
-      this._disableButton(_submitButtonCard, this._config.buttonInvalidClass);
+      this._disableButton(this._submitButtonCard, this._config.buttonInvalidClass);
     }
 
     this._setEventListeners();
