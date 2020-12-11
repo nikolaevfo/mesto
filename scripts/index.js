@@ -72,12 +72,6 @@ function createCard(item, selector) {
   return newElement;
 }
 
-// function setListenerImagePopup(element) {
-//   element.querySelector('.card__img').addEventListener('click', () => {
-//     openImagePopup(element);
-//   });
-// }
-
 function openImagePopup(name, link) {
   popupImageLink.src = link;
   popupImagePlace.textContent = name;
@@ -87,28 +81,11 @@ function openImagePopup(name, link) {
 
 function addCard(item, selector) {
   const card = createCard(item, selector)
-  // setListenerImagePopup(card);
   cardsContainer.prepend(card);
 }
 
 function openPopup(popup) {
-  // const form = popup.querySelector('.popup__form');
-  // const inputList = popup.querySelectorAll('.popup__input');
-
-  // inputList.forEach((input) => {
-  //   const formError = form.querySelector(`#${input.id}-error`);
-  //   formError.textContent = '';
-  //   input.classList.remove('popup__text_state_invalid');
-  // })
-
   popup.classList.add('popup_opened');
-
-  // if (popup.classList.contains('popup-profile')) {
-  //   const submitButtonProfile = popup.querySelector('.popup-profile__btn-add')
-  //   submitButtonProfile.disabled = false;
-  //   submitButtonProfile.classList.remove(validationConfig.buttonInvalidClass);
-  // }
-
   document.addEventListener('keydown', closeOverlayEsc);
 }
 
@@ -190,6 +167,8 @@ popupList.forEach((popup) => {
   })
 })
 
+
+// установка валидации форм ================================
 
 forms.forEach((form) => {
   const formNew = new FormValidator(validationConfig, form);
