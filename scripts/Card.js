@@ -8,22 +8,24 @@ export default class Card {
   }
 
   _getTemplate() {
-    const cardElement = document
+    const _cardElement = document
       .querySelector(this._cardSelector)
       .content
       .querySelector('.card')
       .cloneNode(true);
 
-    return cardElement;
+    return _cardElement;
   }
 
   generateCard() {
     this._element = this._getTemplate();
+    const _cardImg = this._element.querySelector('.card__img');
+
     this._setEventListeners();
 
     this._element.querySelector('.card__title').textContent = this._name;
-    this._element.querySelector('.card__img').src = this._link;
-    this._element.querySelector('.card__img').alt = this._name;
+    _cardImg.src = this._link;
+    _cardImg.alt = this._name;
 
     return this._element;
   }

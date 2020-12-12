@@ -46,8 +46,6 @@ const nameInput = document.querySelector('.popup-profile__text_type_name');
 const jobInput = document.querySelector('.popup-profile__text_type_profession');
 const name = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__subtitle');
-const submitButtonProfile = document.querySelector('.popup-profile__btn-add');
-const inputListProfileForm = formProfileElement.querySelectorAll('.popup__input');
 
 // PopupCard const
 const popupCard = document.querySelector('.popup-card');
@@ -55,7 +53,6 @@ const openPopupCardBtn = document.querySelector('.profile__add-button');
 const formCardElement = document.querySelector('.popup-card__form');
 const placeInput = document.querySelector('.popup-card__text_type_place');
 const linkInput = document.querySelector('.popup-card__text_type_link');
-const inputListCardForm = formCardElement.querySelectorAll('.popup__input');
 
 // Add cards const
 const cardsContainer = document.querySelector('.elements');
@@ -64,6 +61,10 @@ const cardsContainer = document.querySelector('.elements');
 const popupImage = document.querySelector('.popup-image');
 const popupImageLink = popupImage.querySelector('.popup-image__img');
 const popupImagePlace = popupImage.querySelector('.popup-image__title');
+
+// Создаем экземпляры класса валидации каждой форме
+const editProfileFormValidation = new FormValidator(validationConfig, formProfileElement);
+const editCardFormValidation = new FormValidator(validationConfig, formCardElement);
 
 
 function createCard(item, selector) {
@@ -87,19 +88,6 @@ function addCard(item, selector) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeOverlayEsc);
-}
-
-function setPopupProfileSubmitBtnAbled() {
-  submitButtonProfile.disabled = false;
-  submitButtonProfile.classList.remove(validationConfig.buttonInvalidClass);
-}
-
-function cleanPopupInputError(inputList) {
-  inputList.forEach((input) => {
-    const formError = input.closest('.popup__form').querySelector(`#${input.id}-error`);
-    formError.textContent = '';
-    input.classList.remove('popup__text_state_invalid');
-  })
 }
 
 function closePopup(popup) {
@@ -143,18 +131,21 @@ initialCards.forEach((item) => {
 openPopupProfileBtn.addEventListener('click', function () {
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
-  setPopupProfileSubmitBtnAbled();
-  cleanPopupInputError(inputListProfileForm);
+
+  editProfileFormValidation.setPopupSubmitBtnAbled();
+  editProfileFormValidation.cleanPopupInputError();
   openPopup(popupProfile);
 });
+
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 
 
 openPopupCardBtn.addEventListener('click', function () {
   formCardElement.reset();
-  cleanPopupInputError(inputListCardForm);
+  editCardFormValidation.cleanPopupInputError();
   openPopup(popupCard);
 });
+
 formCardElement.addEventListener('submit', formCardSubmitHandler);
 
 // закрытие всех popup по клику на крестик и оверлею
@@ -167,9 +158,7 @@ popupList.forEach((popup) => {
   })
 })
 
-
 // установка валидации форм ================================
-
 forms.forEach((form) => {
   const formNew = new FormValidator(validationConfig, form);
   formNew.enableValidation();
