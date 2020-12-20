@@ -12,6 +12,8 @@ import {
   jobInput,
   forms,
   validationConfig,
+  formProfileElement,
+  formCardElement,
 
 } from '../utils/constants.js';
 
@@ -35,7 +37,33 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 
+const editProfileFormValidation = new FormValidator(validationConfig, formProfileElement);
 
+const userInfo = new UserInfo({ nameInput, jobInput });
+
+const profilePopup = new PopupWithForm('.popup-profile', (evt) => {
+  evt.preventDefault();
+  userInfo.setUserInfo();
+  profilePopup.close();
+});
+
+profilePopup.setEventListeners();
+
+openPopupProfileBtn.addEventListener('click', function () {
+  nameInput.value = userInfo.getUserInfo().name;
+  jobInput.value = userInfo.getUserInfo().job;
+  editProfileFormValidation.setPopupSubmitBtnAbled();
+  editProfileFormValidation.cleanPopupInputError();
+  profilePopup.open();
+})
+
+
+
+
+
+
+
+/*
 openPopupProfileBtn.addEventListener('click', function () {
 
   // выводим текущие значения профайла
@@ -52,8 +80,9 @@ openPopupProfileBtn.addEventListener('click', function () {
 
   profilePopup.open();
 });
+*/
 
-
+/*
 openPopupCardBtn.addEventListener('click', function () {
   // formCardElement.reset();
   // editCardFormValidation.cleanPopupInputError();
@@ -86,9 +115,10 @@ openPopupCardBtn.addEventListener('click', function () {
   });
 
 
-  profileCard.open();
+profileCard.open();
+profileCard.setEventListeners();
 });
-
+*/
 // установка валидации форм ================================
 forms.forEach((form) => {
   const formNew = new FormValidator(validationConfig, form);
