@@ -1,7 +1,7 @@
 export default class Card {
 
   constructor(data, cardSelector, handleCardClick) {
-    this._name = data.name;
+    this._place = data.place;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -21,7 +21,7 @@ export default class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.card__title').textContent = this._name;
+    this._element.querySelector('.card__title').textContent = this._place;
     this._element.querySelector('.card__img').src = this._link;
 
     return this._element;
@@ -36,7 +36,7 @@ export default class Card {
     });
     // открывание попапа картинки
     this._element.querySelector('.card__img').addEventListener('click', () => {
-      this._handleCardClick;
+      this._handleCardClick(this._element);
     });
   }
 

@@ -1,34 +1,36 @@
-const initialCards = [
+export const initialCards = [
   {
-    name: 'Зуевы Ключи',
+    place: 'Зуевы Ключи',
     link: './images/zuevi-cluchi.jpg'
   },
   {
-    name: 'Чегандинские пещеры',
+    place: 'Чегандинские пещеры',
     link: './images/chegadinskie-pesheri.jpg'
   },
   {
-    name: 'Заброшенный храм',
+    place: 'Заброшенный храм',
     link: './images/hram.jpg'
   },
   {
-    name: 'Мувыр',
+    place: 'Мувыр',
     link: './images/muvir.jpg'
   },
   {
-    name: 'Пруд в Коробейниках',
+    place: 'Пруд в Коробейниках',
     link: './images/prud-corobejniki.jpg'
   },
   {
-    name: 'Сидоровы горы',
+    place: 'Сидоровы горы',
     link: './images/sidorovi-gori.jpg'
   }
 ];
 
-const validationConfig = {
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__btn-add',
   buttonInvalidClass: 'popup__btn-add_invalid',
   inputErrorClass: 'popup__text_state_invalid'
 }
+
+export const openPopupProfileBtn = document.querySelector('.profile__edit-button');
