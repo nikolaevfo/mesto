@@ -13,17 +13,14 @@ export default class Card {
       .content
       .querySelector('.card')
       .cloneNode(true);
-
     return cardElement;
   }
 
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-
     this._element.querySelector('.card__title').textContent = this._place;
     this._element.querySelector('.card__img').src = this._link;
-
     return this._element;
   }
 

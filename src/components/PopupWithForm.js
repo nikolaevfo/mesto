@@ -12,14 +12,11 @@ export default class PopupWithForm extends Popup {
     const _inputValues = {};
     _inputValues.place = placeInput.value;
     _inputValues.link = linkInput.value;
-
-
     return _inputValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-
     this._popupElement = document.querySelector(this._popupSelector);
     this._getInputValues();
     this._popupElement.addEventListener('submit', (evt) => {
@@ -31,5 +28,4 @@ export default class PopupWithForm extends Popup {
     super.close();
     this._popupElement.querySelector('.popup__form').reset();
   }
-
 }

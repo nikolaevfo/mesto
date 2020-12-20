@@ -27,14 +27,12 @@ const editCardFormValidation = new FormValidator(validationConfig, formCardEleme
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-
     const card = new Card(item, '.card-template', (element) => {
       const popupImage = new PopupWithImage('.popup-image', element);
       popupImage.open();
       popupImage.setEventListeners();
     });
     const cardElement = card.generateCard();
-
     cardsList.addItem(cardElement);
   },
 },
@@ -65,22 +63,18 @@ openPopupProfileBtn.addEventListener('click', function () {
 // настройка формы карточек
 const cardProfile = new PopupWithForm('.popup-card', (evt) => {
   evt.preventDefault();
-
   const newItem = {}
   newItem.place = cardProfile._getInputValues().place;
   newItem.link = cardProfile._getInputValues().link;
-
   const cardNew = new Section({
     items: [newItem],
     renderer: (item) => {
-
       const card = new Card(item, '.card-template', (element) => {
         const popupImage = new PopupWithImage('.popup-image', element);
         popupImage.open();
         popupImage.setEventListeners();
       });
       const cardElement = card.generateCard();
-
       cardsList.addItem(cardElement);
     },
   },
