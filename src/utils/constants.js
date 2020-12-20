@@ -1,27 +1,34 @@
+const zueviImage = new URL('../images/zuevi-cluchi.jpg', import.meta.url);
+const chegadinskieImage = new URL('../images/chegadinskie-pesheri.jpg', import.meta.url);
+const hramImage = new URL('../images/hram.jpg', import.meta.url);
+const muvirImage = new URL('../images/muvir.jpg', import.meta.url);
+const corobeinikiImage = new URL('../images/prud-corobejniki.jpg', import.meta.url);
+const sidoroviImage = new URL('../images/sidorovi-gori.jpg', import.meta.url);
+
 export const initialCards = [
   {
     place: 'Зуевы Ключи',
-    link: './images/zuevi-cluchi.jpg'
+    link: zueviImage
   },
   {
     place: 'Чегандинские пещеры',
-    link: './images/chegadinskie-pesheri.jpg'
+    link: chegadinskieImage
   },
   {
     place: 'Заброшенный храм',
-    link: './images/hram.jpg'
+    link: hramImage
   },
   {
     place: 'Мувыр',
-    link: './images/muvir.jpg'
+    link: muvirImage
   },
   {
     place: 'Пруд в Коробейниках',
-    link: './images/prud-corobejniki.jpg'
+    link: corobeinikiImage
   },
   {
     place: 'Сидоровы горы',
-    link: './images/sidorovi-gori.jpg'
+    link: sidoroviImage
   }
 ];
 

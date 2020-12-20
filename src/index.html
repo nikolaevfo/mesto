@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+
 </head>
 
 <body class="root">
@@ -13,13 +13,13 @@
   <div class="page">
 
     <header class="header">
-      <img src="./images/logo-white.svg" alt="Лого" class="logo header__logo">
+      <img src="<%=require('./images/logo-white.svg')%>" alt="Лого" class="logo header__logo">
     </header>
 
     <main class="content">
 
       <section class="profile">
-        <img src="./images/jack.jpg" alt="Аватар" class="profile__avatar">
+        <img src="<%=require('./images/jack.jpg')%>" alt="Аватар" class="profile__avatar">
         <div class="profile__info">
           <div class="profile__info-row">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -85,7 +85,7 @@
   <template id="card-template" class="card-template">
     <article class="card">
       <button type="button" class="card__trash button"></button>
-      <img src="./images/sidorovi-gori.jpg" alt="Картинка" class="card__img">
+      <img src="<%=require('./images/sidorovi-gori.jpg')%>" alt="Картинка" class="card__img">
       <div class="card__row">
         <h3 class="card__title">Сидоровы горы</h3>
         <button type="button" class="card__like button"></button>
@@ -93,7 +93,7 @@
     </article>
   </template>
 
-  <script src="./pages/index.js" type="module"></script>
+
 </body>
 
 </html>
