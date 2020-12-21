@@ -4,15 +4,17 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
+    this._fomElement = document.querySelector(this._popupSelector).querySelector('.popup__form');
+    this._popupForm = this._popupElement.querySelector('.popup__form')
   }
 
   _getInputValues() {
-    const placeInput = document.querySelector('.popup-card__text_type_place');
-    const linkInput = document.querySelector('.popup-card__text_type_link');
-    const _inputValues = {};
-    _inputValues.place = placeInput.value;
-    _inputValues.link = linkInput.value;
-    return _inputValues;
+    const _inputs = this._fomElement.querySelectorAll('.popup__input');
+    const inputValues = {};
+    _inputs.forEach((input) => {
+      inputValues[input.name] = input.value
+    });
+    return inputValues;
   }
 
   setEventListeners() {
@@ -26,6 +28,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popupElement.querySelector('.popup__form').reset();
+    this._popupForm.reset();
   }
 }

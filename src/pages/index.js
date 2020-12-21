@@ -64,8 +64,8 @@ openPopupProfileBtn.addEventListener('click', function () {
 const cardProfile = new PopupWithForm('.popup-card', (evt) => {
   evt.preventDefault();
   const newItem = {}
-  newItem.place = cardProfile._getInputValues().place;
-  newItem.link = cardProfile._getInputValues().link;
+  newItem.place = cardProfile._getInputValues().popupInputPlace;
+  newItem.link = cardProfile._getInputValues().popupInputLink;
   const cardNew = new Section({
     items: [newItem],
     renderer: (item) => {
