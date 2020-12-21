@@ -12,7 +12,6 @@ import {
   openPopupCardBtn,
   nameInput,
   jobInput,
-  forms,
   validationConfig,
   formProfileElement,
   formCardElement,
@@ -21,6 +20,10 @@ import {
 const editProfileFormValidation = new FormValidator(validationConfig, formProfileElement);
 const editCardFormValidation = new FormValidator(validationConfig, formCardElement);
 const popupImage = new PopupWithImage('.popup-image');
+const userInfo = new UserInfo();
+
+
+
 
 //  отрисовка карточек
 const cardsList = new Section({
@@ -40,18 +43,17 @@ cardsList.renderItems();
 
 
 // настройка формы профайла
-const userInfo = new UserInfo({ nameInput, jobInput });
-const profilePopup = new PopupWithForm('.popup-profile', (evt) => {
-  evt.preventDefault();
-  userInfo.setUserInfo();
+const profilePopup = new PopupWithForm('.popup-profile', () => {
+  userInfo.setUserInfo(nameInput.value, jobInput.value);
   profilePopup.close();
 });
 
 profilePopup.setEventListeners();
 
 openPopupProfileBtn.addEventListener('click', function () {
-  nameInput.value = userInfo.getUserInfo().name;
-  jobInput.value = userInfo.getUserInfo().job;
+  const toGetUserInfo = userInfo.getUserInfo()
+  nameInput.value = toGetUserInfo.name;
+  jobInput.value = toGetUserInfo.job;
   editProfileFormValidation.setPopupSubmitBtnAbled();
   editProfileFormValidation.cleanPopupInputError();
   profilePopup.open();
@@ -59,26 +61,17 @@ openPopupProfileBtn.addEventListener('click', function () {
 
 
 // настройка формы карточек
-const cardProfile = new PopupWithForm('.popup-card', (evt) => {
-  evt.preventDefault();
+const cardProfile = new PopupWithForm('.popup-card', (inputValues) => {
   const newItem = {}
-  newItem.place = cardProfile._getInputValues().popupInputPlace;
-  newItem.link = cardProfile._getInputValues().popupInputLink;
-  const cardNew = new Section({
-    items: [newItem],
-    renderer: (item) => {
-      const card = new Card(item, '.card-template', (place, link) => {
-        popupImage.open(place, link);
-        popupImage.setEventListeners();
-      });
-      const cardElement = card.generateCard();
-      cardsList.addItem(cardElement);
-    },
-  },
-    '.elements'
-  );
-  cardNew.renderItems();
+  newItem.place = inputValues.popupInputPlace;
+  newItem.link = inputValues.popupInputLink;
 
+  const cardNew = new Card(newItem, '.card-template', (place, link) => {
+    popupImage.open(place, link);
+    popupImage.setEventListeners();
+  });
+  const cardNewElement = cardNew.generateCard();
+  cardsList.addItem(cardNewElement);
   cardProfile.close();
 });
 
@@ -91,8 +84,5 @@ openPopupCardBtn.addEventListener('click', function () {
 
 
 // установка валидации форм ================================
-forms.forEach((form) => {
-  const formNew = new FormValidator(validationConfig, form);
-  formNew.enableValidation();
-});
-
+editProfileFormValidation.enableValidation();
+editCardFormValidation.enableValidation();
