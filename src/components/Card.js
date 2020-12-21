@@ -36,7 +36,7 @@ export default class Card {
     });
     // открывание попапа картинки
     this._element.querySelector('.card__img').addEventListener('click', () => {
-      this._handleCardClick(this._element);
+      this._handleCardClick(this._place, this._link);
     });
   }
 

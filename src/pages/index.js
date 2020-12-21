@@ -16,20 +16,18 @@ import {
   validationConfig,
   formProfileElement,
   formCardElement,
-
 } from '../utils/constants.js';
 
 const editProfileFormValidation = new FormValidator(validationConfig, formProfileElement);
 const editCardFormValidation = new FormValidator(validationConfig, formCardElement);
-
+const popupImage = new PopupWithImage('.popup-image');
 
 //  отрисовка карточек
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '.card-template', (element) => {
-      const popupImage = new PopupWithImage('.popup-image', element);
-      popupImage.open();
+    const card = new Card(item, '.card-template', (place, link) => {
+      popupImage.open(place, link);
       popupImage.setEventListeners();
     });
     const cardElement = card.generateCard();
@@ -69,9 +67,8 @@ const cardProfile = new PopupWithForm('.popup-card', (evt) => {
   const cardNew = new Section({
     items: [newItem],
     renderer: (item) => {
-      const card = new Card(item, '.card-template', (element) => {
-        const popupImage = new PopupWithImage('.popup-image', element);
-        popupImage.open();
+      const card = new Card(item, '.card-template', (place, link) => {
+        popupImage.open(place, link);
         popupImage.setEventListeners();
       });
       const cardElement = card.generateCard();
