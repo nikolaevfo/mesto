@@ -23,8 +23,6 @@ const popupImage = new PopupWithImage('.popup-image');
 const userInfo = new UserInfo();
 
 
-
-
 //  отрисовка карточек
 const cardsList = new Section({
   items: initialCards,
