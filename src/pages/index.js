@@ -23,13 +23,14 @@ const popupImage = new PopupWithImage('.popup-image');
 const userInfo = new UserInfo();
 
 
+popupImage.setEventListeners();
+
 //  отрисовка карточек
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
     const card = new Card(item, '.card-template', (place, link) => {
       popupImage.open(place, link);
-      popupImage.setEventListeners();
     });
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
@@ -66,7 +67,6 @@ const cardProfile = new PopupWithForm('.popup-card', (inputValues) => {
 
   const cardNew = new Card(newItem, '.card-template', (place, link) => {
     popupImage.open(place, link);
-    popupImage.setEventListeners();
   });
   const cardNewElement = cardNew.generateCard();
   cardsList.addItem(cardNewElement);
