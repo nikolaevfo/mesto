@@ -4,7 +4,7 @@ const hramImage = new URL('../images/hram.jpg', import.meta.url);
 const muvirImage = new URL('../images/muvir.jpg', import.meta.url);
 const corobeinikiImage = new URL('../images/prud-corobejniki.jpg', import.meta.url);
 const sidoroviImage = new URL('../images/sidorovi-gori.jpg', import.meta.url);
-
+/*
 export const initialCards = [
   {
     place: 'Зуевы Ключи',
@@ -30,7 +30,7 @@ export const initialCards = [
     place: 'Сидоровы горы',
     link: sidoroviImage
   }
-];
+];*/
 
 export const validationConfig = {
   formSelector: '.popup__form',

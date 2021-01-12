@@ -7,7 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
 import {
-  initialCards,
+  // initialCards,
   openPopupProfileBtn,
   openPopupCardBtn,
   nameInput,
@@ -26,19 +26,30 @@ const userInfo = new UserInfo();
 popupImage.setEventListeners();
 
 //  отрисовка карточек
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '.card-template', (place, link) => {
-      popupImage.open(place, link);
-    });
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
-  },
-},
-  '.elements'
-);
-cardsList.renderItems();
+let initialCards = [];
+fetch('https://mesto.nomoreparties.co/v1/cohort-19/cards', {
+  headers: {
+    authorization: '528df5a2-16f1-4f0e-9003-28f33571e107'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    initialCards = result;
+    const cardsList = new Section({
+      items: initialCards,
+      renderer: (item) => {
+        const card = new Card(item, '.card-template', (name, link) => {
+          popupImage.open(name, link);
+        });
+        const cardElement = card.generateCard();
+        cardsList.addItem(cardElement);
+      },
+    },
+      '.elements'
+    );
+    cardsList.renderItems();
+  });
+
 
 
 // настройка формы профайла
@@ -86,11 +97,4 @@ editProfileFormValidation.enableValidation();
 editCardFormValidation.enableValidation();
 
 // устанавливаем имя и описание ====================================
-userInfo.douwnloadUserInfo()
-
-
-
-// const profileAvatar = document.querySelector('.profile__avatar');
-// const profileTitle = document.querySelector('.profile__avatar');
-const profileAvatar = document.querySelector('.profile__avatar');
-
+userInfo.douwnloadUserInfo();
