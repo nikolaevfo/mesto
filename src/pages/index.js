@@ -84,3 +84,13 @@ openPopupCardBtn.addEventListener('click', function () {
 // установка валидации форм ================================
 editProfileFormValidation.enableValidation();
 editCardFormValidation.enableValidation();
+
+// устанавливаем имя и описание ====================================
+userInfo.douwnloadUserInfo()
+
+
+
+// const profileAvatar = document.querySelector('.profile__avatar');
+// const profileTitle = document.querySelector('.profile__avatar');
+const profileAvatar = document.querySelector('.profile__avatar');
+
