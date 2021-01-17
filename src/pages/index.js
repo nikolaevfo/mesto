@@ -30,28 +30,64 @@ const api = new Api({
   }
 })
 
-// функция создания карточки =====================================
-const createCard = (data) => {
-  const card = new Card(data, '.card-template', (place, link) => {
-    popupImage.open(place, link);
-  });
-  return card.generateCard();
-}
 
-// Закрытие по оверлею и кнопке ==================================================
-popupImage.setEventListeners();
+const deleteCardProfile = new PopupWithForm('.popup-delete-card', () => {
+  deleteCardProfile.close();
+});
 
-//  отрисовка карточек =======================================================
-const cardsList = new Section(
-  (item) => {
-    cardsList.addItem(createCard(item));
-  },
-  '.elements'
-);
-
-api.getCards()
+// устанавливаем имя и описание ====================================
+api.douwnloadUserInfo()
   .then(result => {
-    cardsList.renderItems(result)
+    userInfo.setUserInfo(result.name, result.about);
+    profileAvatar.src = result.avatar;
+    const userId = result._id;
+
+
+    // функция создания карточки =====================================
+    const createCard = (data) => {
+      const card = new Card(data, '.card-template', (place, link) => {
+        popupImage.open(place, link);
+      }, () => {
+        deleteCardProfile.open();
+      }, userId
+      );
+      return card.generateCard();
+    }
+
+    //  отрисовка карточек =======================================================
+    const cardsList = new Section(
+      (item) => {
+        cardsList.addItem(createCard(item));
+      },
+      '.elements'
+    );
+
+    api.getCards()
+      .then(result => {
+        cardsList.renderItems(result)
+      })
+
+
+    // настройка формы карточек =========================
+    const cardProfile = new PopupWithForm('.popup-card', (inputValues) => {
+      const newItem = {}
+      newItem.name = inputValues.popupInputPlace;
+      newItem.link = inputValues.popupInputLink;
+      api.addCard(newItem)
+        .then(result => {
+          cardsList.addItem(createCard({ ...newItem, _id: result.id, likes: [] }))
+        })
+        .catch(err => console.log('Ошибка при создании карточки', err))
+      cardProfile.close();
+    });
+
+    cardProfile.setEventListeners();
+
+    openPopupCardBtn.addEventListener('click', function () {
+      editCardFormValidation.cleanPopupInputError();
+      cardProfile.open();
+    })
+
   })
 
 
@@ -64,7 +100,7 @@ const profilePopup = new PopupWithForm('.popup-profile', () => {
   profilePopup.close();
 });
 
-profilePopup.setEventListeners();
+
 
 openPopupProfileBtn.addEventListener('click', function () {
   const UserData = userInfo.getUserInfo()
@@ -76,35 +112,12 @@ openPopupProfileBtn.addEventListener('click', function () {
 })
 
 
-// настройка формы карточек
-const cardProfile = new PopupWithForm('.popup-card', (inputValues) => {
-  const newItem = {}
-  newItem.name = inputValues.popupInputPlace;
-  newItem.link = inputValues.popupInputLink;
-  console.log(newItem)
-  api.addCard(newItem)
-    .then(result => {
-      cardsList.addItem(createCard({ ...newItem, _id: result.id }))
-    })
-    .catch(err => console.log('Ошибка при создании карточки'))
-  cardProfile.close();
-});
-
-cardProfile.setEventListeners();
-
-openPopupCardBtn.addEventListener('click', function () {
-  editCardFormValidation.cleanPopupInputError();
-  cardProfile.open();
-})
-
+// Закрытие по оверлею и кнопке ==================================================
+deleteCardProfile.setEventListeners();
+popupImage.setEventListeners();
+profilePopup.setEventListeners();
 
 // установка валидации форм ================================
 editProfileFormValidation.enableValidation();
 editCardFormValidation.enableValidation();
 
-// устанавливаем имя и описание ====================================
-api.douwnloadUserInfo()
-  .then(result => {
-    userInfo.setUserInfo(result.name, result.about);
-    profileAvatar.src = result.avatar;
-  })

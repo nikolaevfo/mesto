@@ -1,5 +1,7 @@
 .popup__button-cross {
   position: absolute;
+  width: 58px;
+  height: 58px;
   top: -47px;
   right: -47px;
   background: url("../../../images/cross.svg") center/contain no-repeat;
@@ -9,6 +11,8 @@
   .popup__button-cross {
     width: 45px;
     height: 45px;
+    top: -40px;
+    right: -40px;
   }
 }
 
@@ -16,5 +20,7 @@
   .popup__button-cross {
     width: 35px;
     height: 35px;
+    top: -30px;
+    right: -30px;
   }
 }

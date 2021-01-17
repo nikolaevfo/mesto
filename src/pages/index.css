@@ -26,8 +26,6 @@
 @import url(../blocks/popup-profile/__container/popup-profile__container.css);
 @import url(../blocks/popup-profile/__button-cross/popup-profile__button-cross.css);
 
-@import url(../blocks/popup-card/__container/popup-card__container.css);
-@import url(../blocks/popup-card/__button-cross/popup-card__button-cross.css);
 @import url(../blocks/popup-card/__title/popup-card__title.css);
 @import url(../blocks/popup-card/__text/popup-card__text.css);
 
@@ -55,6 +53,7 @@
 @import url(../blocks/card/__like-quantity/card__like-quantity.css);
 @import url(../blocks/card/__like-quantity/_hidden/card__like-quantity_hidden.css);
 @import url(../blocks/card/__trash/card__trash.css);
+@import url(../blocks/card/__trash/_hidden/card__trash_hidden.css);
 @import url(../blocks/card/__like/_active/card__like_active.css);
 
 @import url(../blocks/footer/footer.css);
