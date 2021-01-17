@@ -50,7 +50,10 @@
 @import url(../blocks/card/__img/card__img.css);
 @import url(../blocks/card/__row/card__row.css);
 @import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__like-items/card__like-items.css);
 @import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/__like-quantity/card__like-quantity.css);
+@import url(../blocks/card/__like-quantity/_hidden/card__like-quantity_hidden.css);
 @import url(../blocks/card/__trash/card__trash.css);
 @import url(../blocks/card/__like/_active/card__like_active.css);
 

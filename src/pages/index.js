@@ -6,8 +6,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
+import Api from '../components/Api.js';
 import {
-  // initialCards,
   openPopupProfileBtn,
   openPopupCardBtn,
   nameInput,
@@ -15,43 +15,52 @@ import {
   validationConfig,
   formProfileElement,
   formCardElement,
+  profileAvatar,
 } from '../utils/constants.js';
 
 const editProfileFormValidation = new FormValidator(validationConfig, formProfileElement);
 const editCardFormValidation = new FormValidator(validationConfig, formCardElement);
 const popupImage = new PopupWithImage('.popup-image');
 const userInfo = new UserInfo();
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-19',
+  headers: {
+    authorization: '528df5a2-16f1-4f0e-9003-28f33571e107',
+    'Content-Type': 'application/json'
+  }
+})
 
+// функция создания карточки =====================================
+const createCard = (data) => {
+  const card = new Card(data, '.card-template', (place, link) => {
+    popupImage.open(place, link);
+  });
+  return card.generateCard();
+}
 
+// Закрытие по оверлею и кнопке ==================================================
 popupImage.setEventListeners();
 
-//  отрисовка карточек
+//  отрисовка карточек =======================================================
 const cardsList = new Section(
   (item) => {
-    const card = new Card(item, '.card-template', (name, link) => {
-      popupImage.open(name, link);
-    });
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
+    cardsList.addItem(createCard(item));
   },
   '.elements'
 );
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-19/cards', {
-  headers: {
-    authorization: '528df5a2-16f1-4f0e-9003-28f33571e107'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    cardsList.renderItems(result);
-  });
-
+api.getCards()
+  .then(result => {
+    cardsList.renderItems(result)
+  })
 
 
 // настройка формы профайла
 const profilePopup = new PopupWithForm('.popup-profile', () => {
-  userInfo.setUserInfo(nameInput.value, jobInput.value);
+  api.patchUserInfo(nameInput.value, jobInput.value)
+    .then(result => {
+      userInfo.setUserInfo(result.name, result.about)
+    });
   profilePopup.close();
 });
 
@@ -70,14 +79,14 @@ openPopupProfileBtn.addEventListener('click', function () {
 // настройка формы карточек
 const cardProfile = new PopupWithForm('.popup-card', (inputValues) => {
   const newItem = {}
-  newItem.place = inputValues.popupInputPlace;
+  newItem.name = inputValues.popupInputPlace;
   newItem.link = inputValues.popupInputLink;
-
-  const cardNew = new Card(newItem, '.card-template', (place, link) => {
-    popupImage.open(place, link);
-  });
-  const cardNewElement = cardNew.generateCard();
-  cardsList.addItem(cardNewElement);
+  console.log(newItem)
+  api.addCard(newItem)
+    .then(result => {
+      cardsList.addItem(createCard({ ...newItem, _id: result.id }))
+    })
+    .catch(err => console.log('Ошибка при создании карточки'))
   cardProfile.close();
 });
 
@@ -94,4 +103,8 @@ editProfileFormValidation.enableValidation();
 editCardFormValidation.enableValidation();
 
 // устанавливаем имя и описание ====================================
-userInfo.douwnloadUserInfo();
+api.douwnloadUserInfo()
+  .then(result => {
+    userInfo.setUserInfo(result.name, result.about);
+    profileAvatar.src = result.avatar;
+  })
