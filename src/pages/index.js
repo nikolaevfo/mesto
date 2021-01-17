@@ -16,10 +16,16 @@ import {
   formProfileElement,
   formCardElement,
   profileAvatar,
+  profileAvatarBtn,
+  formAvatarElement,
+  formAvatarBtnAdd,
+  formProfileBtnAdd,
+  formCardBtnAdd,
 } from '../utils/constants.js';
 
 const editProfileFormValidation = new FormValidator(validationConfig, formProfileElement);
 const editCardFormValidation = new FormValidator(validationConfig, formCardElement);
+const editAvatarFormValidation = new FormValidator(validationConfig, formAvatarElement);
 const popupImage = new PopupWithImage('.popup-image');
 const userInfo = new UserInfo();
 const api = new Api({
@@ -30,12 +36,15 @@ const api = new Api({
   }
 })
 
-
+/*
 const deleteCardProfile = new PopupWithForm('.popup-delete-card', () => {
+  api.deleteCard(card.getId())
+    .then(() => card.removeCard())
+    .catch(err => console.log('Ошибка при удалении'))
   deleteCardProfile.close();
-});
+});*/
 
-// устанавливаем имя и описание ====================================
+// загружаем имя и описание пользователя ====================================
 api.douwnloadUserInfo()
   .then(result => {
     userInfo.setUserInfo(result.name, result.about);
@@ -43,18 +52,44 @@ api.douwnloadUserInfo()
     const userId = result._id;
 
 
-    // функция создания карточки =====================================
+    // функция создания карточки с учетом id пользователя =====================================
     const createCard = (data) => {
-      const card = new Card(data, '.card-template', (place, link) => {
-        popupImage.open(place, link);
-      }, () => {
-        deleteCardProfile.open();
-      }, userId
+      const card = new Card(data, '.card-template',
+        // handleCardClick
+        (place, link) => {
+          popupImage.open(place, link);
+        },
+        // handleTrashCardClick, для каждой карточки при нажатии на корзину будет создаваться экземпляр класса PopupWithForm для ее удаления
+        () => {
+          const deleteCardPopup = new PopupWithForm('.popup-delete-card', () => {
+            // колбэк при согласии на удаление
+            api.deleteCard(card.getId())
+              .then(() => card.removeCard())
+              .catch(err => console.log('Ошибка при удалении'))
+            deleteCardPopup.removeListener();
+            deleteCardPopup.close();
+          });
+          deleteCardPopup.open();
+          deleteCardPopup.setEventListeners();
+        }, userId
       );
-      return card.generateCard();
+      // передача кобэков для реализации лайков
+      return card.generateCard(() => {
+        api.checkLike(card.getId())
+          .then(result => {
+            card.checkLike(result)
+          })
+          .catch(err => console.log('Ошибка при реализации лайка', err));
+      }, () => {
+        api.disLike(card.getId())
+          .then(result => {
+            card.disLike(result)
+          })
+          .catch(err => console.log('Ошибка при реализации лайка', err));
+      });
     }
 
-    //  отрисовка карточек =======================================================
+    //  отрисовка карточек ==========================================
     const cardsList = new Section(
       (item) => {
         cardsList.addItem(createCard(item));
@@ -66,6 +101,7 @@ api.douwnloadUserInfo()
       .then(result => {
         cardsList.renderItems(result)
       })
+      .catch(err => console.log('Ошибка при создании карточек', err));
 
 
     // настройка формы карточек =========================
@@ -73,11 +109,13 @@ api.douwnloadUserInfo()
       const newItem = {}
       newItem.name = inputValues.popupInputPlace;
       newItem.link = inputValues.popupInputLink;
+      formCardBtnAdd.textContent = 'Сохранить...'
       api.addCard(newItem)
         .then(result => {
-          cardsList.addItem(createCard({ ...newItem, _id: result.id, likes: [] }))
+          cardsList.addItem(createCard({ ...newItem, _id: result._id, likes: [] }));
+          formCardBtnAdd.textContent = 'Сохранить'
         })
-        .catch(err => console.log('Ошибка при создании карточки', err))
+        .catch(err => console.log('Ошибка при создании карточки', err));
       cardProfile.close();
     });
 
@@ -87,20 +125,20 @@ api.douwnloadUserInfo()
       editCardFormValidation.cleanPopupInputError();
       cardProfile.open();
     })
-
   })
 
 
 // настройка формы профайла
-const profilePopup = new PopupWithForm('.popup-profile', () => {
-  api.patchUserInfo(nameInput.value, jobInput.value)
+const profilePopup = new PopupWithForm('.popup-profile', (inputValues) => {
+  formProfileBtnAdd.textContent = 'Сохранить...'
+  api.patchUserInfo(inputValues.popupInputName, inputValues.popupInputJob)
     .then(result => {
-      userInfo.setUserInfo(result.name, result.about)
-    });
+      userInfo.setUserInfo(result.name, result.about);
+      formProfileBtnAdd.textContent = 'Сохранить'
+    })
+    .catch(err => console.log('Ошибка при сохраненни информации', err));
   profilePopup.close();
 });
-
-
 
 openPopupProfileBtn.addEventListener('click', function () {
   const UserData = userInfo.getUserInfo()
@@ -112,12 +150,31 @@ openPopupProfileBtn.addEventListener('click', function () {
 })
 
 
+// настройка формы аватара
+const avatarPopup = new PopupWithForm('.popup-avatar', (inputValues) => {
+  formAvatarBtnAdd.textContent = 'Да...'
+  api.patchUserAvatar(inputValues.avatarInputLink)
+    .then(result => {
+      profileAvatar.src = result.avatar;
+      formAvatarBtnAdd.textContent = 'Да'
+    })
+    .catch(err => console.log('Ошибка при сохраненни аватара', err));
+  avatarPopup.close();
+});
+
+profileAvatarBtn.addEventListener('click', function () {
+  avatarPopup.open()
+})
+
+
 // Закрытие по оверлею и кнопке ==================================================
-deleteCardProfile.setEventListeners();
+// deleteCardProfile.setEventListeners();
 popupImage.setEventListeners();
 profilePopup.setEventListeners();
+avatarPopup.setEventListeners();
 
 // установка валидации форм ================================
 editProfileFormValidation.enableValidation();
 editCardFormValidation.enableValidation();
+editAvatarFormValidation.enableValidation();
 
