@@ -24,9 +24,7 @@ export default class Card {
   }
 
   generateCard(likeCB, disLikeCB) {
-
     const _cardImg = this._element.querySelector('.card__img');
-
     const _cardTrash = this._element.querySelector('.card__trash');
     const _cardLike = this._element.querySelector('.card__like');
     this._setEventListeners(likeCB, disLikeCB);
@@ -34,20 +32,25 @@ export default class Card {
     _cardImg.src = this._link;
     _cardImg.alt = this._place;
     this._cardLikesQuantity.textContent = this._likes.length;
+
     // проверка количества лайков
     if (this._likes.length === 0) {
       this._cardLikesQuantity.classList.add('card__like-quantity_hidden')
     }
+
     // проверка, создана ли карточка нами
     if ((this._owner) && this._owner._id !== this._userId) {
       _cardTrash.classList.add('card__trash_hidden')
     }
+
     // проверка, лайкали ли мы уже карточку
     this._likes.forEach(element => {
       if (element._id === this._userId) {
         _cardLike.classList.add('card__like_active')
       }
     });
+    this._element.id = this._id;
+
     return this._element;
   }
 
@@ -82,12 +85,12 @@ export default class Card {
     return this._id;
   }
 
-  removeCard() {
-    this._element.remove();
-    this._element = null;
-  }
+  // removeCard() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
 
-  checkLike(response) {
+  addLike(response) {
     this._cardLikesQuantity.textContent = response.likes.length;
     this._cardLikesQuantity.classList.remove('card__like-quantity_hidden');
 

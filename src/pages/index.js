@@ -36,13 +36,60 @@ const api = new Api({
   }
 })
 
-/*
-const deleteCardProfile = new PopupWithForm('.popup-delete-card', () => {
-  api.deleteCard(card.getId())
-    .then(() => card.removeCard())
-    .catch(err => console.log('Ошибка при удалении'))
-  deleteCardProfile.close();
-});*/
+
+let removeCardId = '';
+const deleteCardPopup = new PopupWithForm('.popup-delete-card', () => {
+  api.deleteCard(removeCardId)
+    .then(() => {
+      const deletedElement = document.getElementById(removeCardId);
+      deletedElement.remove();
+      deletedElement = null;
+    })
+    .catch(err => console.log('Ошибка при удалении', err))
+  deleteCardPopup.close();
+});
+deleteCardPopup.setEventListeners();
+
+
+// функция создания карточки с учетом id пользователя =====================================
+const createCard = (data, userId) => {
+  const card = new Card(data, '.card-template',
+    // handleCardClick
+    (place, link) => {
+      popupImage.open(place, link);
+    },
+    // handleTrashCardClick, для каждой карточки при нажатии на корзину будет создаваться экземпляр класса PopupWithForm для ее удаления
+    () => {
+      /*const deleteCardPopup = new PopupWithForm('.popup-delete-card', () => {
+        // колбэк при согласии на удаление
+        api.deleteCard(card.getId())
+          .then(() => card.removeCard())
+          .catch(err => console.log('Ошибка при удалении', err))
+        deleteCardPopup.removeListener();
+        deleteCardPopup.close();
+    });*/
+      deleteCardPopup.open();
+      removeCardId = card.getId();
+      console.log(removeCardId)
+      // deleteCardPopup.setEventListeners();
+    }, userId
+  );
+  // передача кобэков для реализации лайков
+  return card.generateCard(() => {
+    api.addLike(card.getId())
+      .then(result => {
+        card.addLike(result)
+      })
+      .catch(err => console.log('Ошибка при реализации лайка', err));
+  }, () => {
+    api.disLike(card.getId())
+      .then(result => {
+        card.disLike(result)
+      })
+      .catch(err => console.log('Ошибка при реализации лайка', err));
+  });
+}
+
 
 // загружаем имя и описание пользователя ====================================
 api.douwnloadUserInfo()
@@ -51,48 +98,10 @@ api.douwnloadUserInfo()
     profileAvatar.src = result.avatar;
     const userId = result._id;
 
-
-    // функция создания карточки с учетом id пользователя =====================================
-    const createCard = (data) => {
-      const card = new Card(data, '.card-template',
-        // handleCardClick
-        (place, link) => {
-          popupImage.open(place, link);
-        },
-        // handleTrashCardClick, для каждой карточки при нажатии на корзину будет создаваться экземпляр класса PopupWithForm для ее удаления
-        () => {
-          const deleteCardPopup = new PopupWithForm('.popup-delete-card', () => {
-            // колбэк при согласии на удаление
-            api.deleteCard(card.getId())
-              .then(() => card.removeCard())
-              .catch(err => console.log('Ошибка при удалении'))
-            deleteCardPopup.removeListener();
-            deleteCardPopup.close();
-          });
-          deleteCardPopup.open();
-          deleteCardPopup.setEventListeners();
-        }, userId
-      );
-      // передача кобэков для реализации лайков
-      return card.generateCard(() => {
-        api.checkLike(card.getId())
-          .then(result => {
-            card.checkLike(result)
-          })
-          .catch(err => console.log('Ошибка при реализации лайка', err));
-      }, () => {
-        api.disLike(card.getId())
-          .then(result => {
-            card.disLike(result)
-          })
-          .catch(err => console.log('Ошибка при реализации лайка', err));
-      });
-    }
-
     //  отрисовка карточек ==========================================
     const cardsList = new Section(
       (item) => {
-        cardsList.addItem(createCard(item));
+        cardsList.addItem(createCard(item, userId));
       },
       '.elements'
     );
@@ -112,7 +121,7 @@ api.douwnloadUserInfo()
       formCardBtnAdd.textContent = 'Сохранить...'
       api.addCard(newItem)
         .then(result => {
-          cardsList.addItem(createCard({ ...newItem, _id: result._id, likes: [] }));
+          cardsList.addItem(createCard({ ...newItem, _id: result._id, likes: [] }, userId));
           formCardBtnAdd.textContent = 'Сохранить'
         })
         .catch(err => console.log('Ошибка при создании карточки', err));

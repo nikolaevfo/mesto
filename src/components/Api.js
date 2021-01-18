@@ -75,7 +75,7 @@ export default class Api {
       })
   }
 
-  checkLike(id) {
+  addLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: 'PUT',
       headers: this._headers,
