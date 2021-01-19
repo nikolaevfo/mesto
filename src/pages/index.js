@@ -58,19 +58,10 @@ const createCard = (data, userId) => {
     (place, link) => {
       popupImage.open(place, link);
     },
-    // handleTrashCardClick, для каждой карточки при нажатии на корзину будет создаваться экземпляр класса PopupWithForm для ее удаления
+    // handleTrashCardClick =========================================
     () => {
-      /*const deleteCardPopup = new PopupWithForm('.popup-delete-card', () => {
-        // колбэк при согласии на удаление
-        api.deleteCard(card.getId())
-          .then(() => card.removeCard())
-          .catch(err => console.log('Ошибка при удалении', err))
-        deleteCardPopup.removeListener();
-        deleteCardPopup.close();
-    });*/
       deleteCardPopup.open();
       removeCardId = card.getId();
-      // deleteCardPopup.setEventListeners();
     }, userId
   );
   // передача кобэков для реализации лайков
@@ -176,7 +167,6 @@ profileAvatarBtn.addEventListener('click', function () {
 
 
 // Закрытие по оверлею и кнопке ==================================================
-// deleteCardProfile.setEventListeners();
 popupImage.setEventListeners();
 profilePopup.setEventListeners();
 avatarPopup.setEventListeners();

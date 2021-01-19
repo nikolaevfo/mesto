@@ -76,19 +76,9 @@ export default class Card {
     }
   }
 
-  // _deleteCard() {
-  //   const _deleteItem = this._element.querySelector('.card__trash').closest('.card');
-  //   _deleteItem.remove();
-  // }
-
   getId() {
     return this._id;
   }
-
-  // removeCard() {
-  //   this._element.remove();
-  //   this._element = null;
-  // }
 
   addLike(response) {
     this._cardLikesQuantity.textContent = response.likes.length;

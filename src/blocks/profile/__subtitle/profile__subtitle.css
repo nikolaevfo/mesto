@@ -4,7 +4,7 @@
   line-height: 22px;
   max-width: 300px;
   text-overflow: ellipsis;
-  white-space: wrap;
+  white-space: normal;
   overflow: hidden;
 }
 
