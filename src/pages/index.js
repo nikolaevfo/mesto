@@ -70,7 +70,6 @@ const createCard = (data, userId) => {
     });*/
       deleteCardPopup.open();
       removeCardId = card.getId();
-      console.log(removeCardId)
       // deleteCardPopup.setEventListeners();
     }, userId
   );
@@ -121,7 +120,7 @@ api.douwnloadUserInfo()
       formCardBtnAdd.textContent = 'Сохранить...'
       api.addCard(newItem)
         .then(result => {
-          cardsList.addItem(createCard({ ...newItem, _id: result._id, likes: [] }, userId));
+          cardsList.addItem(createCard({ ...newItem, _id: result._id, likes: result.likes }, userId));
           formCardBtnAdd.textContent = 'Сохранить'
         })
         .catch(err => console.log('Ошибка при создании карточки', err));
