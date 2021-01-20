@@ -13,4 +13,4 @@ export default class Section {
   addItem(element) {
     document.querySelector(this._containerSelector).prepend(element);
   }
-} 
+}

@@ -2,7 +2,9 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
-    this._submitButton = this._form.querySelector(this._config.submitButtonSelector);
+    this._submitButton = this._form.querySelector(
+      this._config.submitButtonSelector
+    );
     this._inputList = this._form.querySelectorAll(this._config.inputSelector);
   }
 
@@ -13,8 +15,8 @@ export default class FormValidator {
 
   cleanPopupInputError() {
     this._inputList.forEach((input) => {
-      this._hideInputError(input)
-    })
+      this._hideInputError(input);
+    });
   }
 
   _showInputError(input) {
@@ -25,7 +27,7 @@ export default class FormValidator {
 
   _hideInputError(input) {
     const _formError = this._form.querySelector(`#${input.id}-error`);
-    _formError.textContent = '';
+    _formError.textContent = "";
     input.classList.remove(this._config.inputErrorClass);
   }
 
@@ -42,7 +44,7 @@ export default class FormValidator {
       button.classList.remove(this._config.buttonInvalidClass);
       button.disabled = false;
     } else {
-      this._disableButton(button)
+      this._disableButton(button);
     }
   }
 
@@ -53,17 +55,16 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList.forEach((input) => {
-      input.addEventListener('input', () => {
+      input.addEventListener("input", () => {
         this._isInputValid(input);
-        this._toggleButtonState(this._submitButton, this._form.checkValidity())
-      })
-    })
+        this._toggleButtonState(this._submitButton, this._form.checkValidity());
+      });
+    });
   }
 
   enableValidation() {
-
-    if (this._form.classList.contains('popup-card__form')) {
-      this._form.addEventListener('submit', (evt) => {
+    if (this._form.classList.contains("popup-card__form")) {
+      this._form.addEventListener("submit", (evt) => {
         evt.preventDefault();
         this._disableButton(this._submitButton);
       });
