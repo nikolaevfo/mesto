@@ -25,6 +25,8 @@
 ```
 git clone https://github.com/nikolaevfo/mesto.git
 ```
-и откройте файл Index.html в любом браузере
+- Установить сторонние библиотеки командой npm i
+- Запустить сборку командрой npm run build
+- открыть файл index.html в папке dist
 
 ### Ссылка на GH Pages: [Места](https://nikolaevfo.github.io/mesto/index.html).
